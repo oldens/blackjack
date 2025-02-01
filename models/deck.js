@@ -5,11 +5,15 @@ class Deck {
     this.cards = [];
     // Load cards from JSON file if provided
     if (jsonFile) {
-      fetch(jsonFile)
-        .then((response) => response.json())
-        .then((json) => this.importFromJSON(json))
-        .catch((error) => console.error('Error loading deck:', error));
+      this.loadCardsFromJSON(jsonFile);
     }
+  }
+
+  loadCardsFromJSON(jsonFile) {
+    fetch(jsonFile)
+      .then((response) => response.json())
+      .then((json) => this.importFromJSON(json))
+      .catch((error) => console.error('Error loading deck:', error));
   }
 
   importFromJSON(json) {
@@ -32,7 +36,6 @@ class Deck {
       [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
     }
   }
-
 }
 
 export default Deck;
