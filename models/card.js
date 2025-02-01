@@ -19,7 +19,6 @@ class Card {
     return `${this.rank} of ${this.suit}`;
   }
 
-
   show() {
     this.html.style.display = "block";
   }
@@ -38,9 +37,6 @@ class Card {
     imgElement.style.height = "250px";
     imgElement.style.margin = "10px";
     cardContainer.appendChild(imgElement);
-
-    // Remove or conditionally set display:none if you don't want it hidden by default.
-    // cardContainer.style.display = "none";
 
     return cardContainer;
   }

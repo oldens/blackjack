@@ -4,7 +4,11 @@ class Player {
         this.hand = [];
         this.score = 0;
         this.handContainer = this.createHandContainer();
-        this.id='player'+Symbol().toString().slice(7);  // Generate a unique id
+        this.id = this.generateUniqueId();
+    }
+
+    generateUniqueId() {
+        return 'player' + Symbol().toString().slice(7);
     }
 
     createHandContainer() {
@@ -14,19 +18,29 @@ class Player {
         handContainer.style.flexDirection = "row";
         handContainer.style.margin = "10px";
         handContainer.id = this.id;
-        const userScore=document.createElement("div");
-        userScore.id = this.id + "_score";
-        userScore.innerHTML = this.name + " Score: " + this.score;
+        const userScore = this.createUserScoreElement();
         handContainer.appendChild(userScore);
         return handContainer;
     }
 
+    createUserScoreElement() {
+        const userScore = document.createElement("div");
+        userScore.id = this.id + "_score";
+        userScore.innerHTML = this.name + " Score: " + this.score;
+        return userScore;
+    }
 
     addCard(card) {
         this.hand.push(card);
         this.handContainer.appendChild(card.html);
         this.score += card.value;
         card.show();
+        this.updateScoreDisplay();
+    }
+
+    updateScoreDisplay() {
+        const userScore = document.getElementById(this.id + "_score");
+        userScore.innerHTML = this.name + " Score: " + this.score;
     }
 
     reset() {
@@ -35,8 +49,6 @@ class Player {
         this.handContainer.remove();
         this.handContainer = this.createHandContainer();
     }
-
-   
 }
 
 export default Player;
